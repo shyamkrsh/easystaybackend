@@ -1,0 +1,214 @@
+{
+  "properties": [
+    {
+      "title": "Seaside Retreat Hostel",
+      "category": "hostel",
+      "street_address": "1 Beach Rd, Oceanside, 92054",
+      "status": "available",
+      "price": 30,
+      "ownerName": "Eve Carter",
+      "images": [
+        "https://i.ytimg.com/vi/knXxbZqLlgA/maxresdefault.jpg",
+        "https://images.pexels.com/photos/2477886/pexels-photo-2477886.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "done",
+      "description": "Enjoy a beachside stay with shared and private accommodations, perfect for ocean lovers."
+    },
+    {
+      "title": "Mountain View Hotel",
+      "category": "hotel",
+      "street_address": "45 Summit Ave, Hilltown, 98765",
+      "status": "available",
+      "price": 200,
+      "ownerName": "Frank Wilson",
+      "images": [
+        "https://e1.pxfuel.com/desktop-wallpaper/574/393/desktop-wallpaper-100-duplex-home-design-duplex-house-design-for-2022-duplex.jpg",
+        "https://images.pexels.com/photos/2097335/pexels-photo-2097335.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "done",
+      "description": "A luxurious mountain hotel featuring stunning views, a spa, and gourmet dining options."
+    },
+    {
+      "title": "Historic Inn",
+      "category": "hotel",
+      "street_address": "32 Heritage St, Oldtown, 65432",
+      "status": "currently unavailable",
+      "price": 120,
+      "ownerName": "Grace Martinez",
+      "images": [
+        "https://i.pinimg.com/originals/fd/4d/53/fd4d53224c2193c87db469745125b653.jpg",
+        "https://images.pexels.com/photos/2904980/pexels-photo-2904980.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "not done",
+      "description": "A charming inn with historic decor, located in the heart of the old town with easy access to local attractions."
+    },
+    {
+      "title": "Suburban Comfort Rooms",
+      "category": "rooms for rent",
+      "street_address": "101 Maple Dr, Suburbia, 78901",
+      "status": "available",
+      "price": 45,
+      "ownerName": "Henry Kim",
+      "images": [
+        "https://wallpapercave.com/wp/wp2464201.jpg",
+        "https://images.pexels.com/photos/2053731/pexels-photo-2053731.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "done",
+      "description": "Affordable and cozy rooms located in a peaceful suburb, great for families and long stays."
+    },
+    {
+      "title": "Artisan Market Tour",
+      "category": "tour",
+      "street_address": "N/A",
+      "status": "available",
+      "price": 25,
+      "ownerName": "Liam Anderson",
+      "images": [
+        "https://images.pexels.com/photos/1679665/pexels-photo-1679665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "https://images.pexels.com/photos/3582741/pexels-photo-3582741.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "not done",
+      "description": "Discover local crafts and flavors with a guided tour of the city's artisan markets."
+    },
+    {
+      "title": "Eco-Friendly Hostel",
+      "category": "hostel",
+      "street_address": "99 Greenway, Eco City, 45678",
+      "status": "available",
+      "price": 35,
+      "ownerName": "Sophie Lee",
+      "images": [
+        "https://png.pngtree.com/thumb_back/fh260/background/20221211/pngtree-bunk-metal-beds-in-hostel-room-curtain-lodging-bunkbed-photo-image_20837832.jpg",
+        "https://images.pexels.com/photos/3683048/pexels-photo-3683048.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "done",
+      "description": "A sustainable hostel focusing on eco-friendly practices and community living."
+    },
+    {
+      "title": "Business Class Hotel",
+      "category": "hotel",
+      "street_address": "78 Corporate Blvd, Business City, 32109",
+      "status": "available",
+      "price": 180,
+      "ownerName": "Julia Roberts",
+      "images": [
+        "https://coreminds.in/kbs/admin/uploads/image/facilities/750-500-hostel.jpg",
+        "https://images.pexels.com/photos/3052367/pexels-photo-3052367.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "done",
+      "description": "Designed for business travelers, this hotel features meeting rooms and high-speed internet access."
+    },
+    {
+      "title": "Charming Guesthouse",
+      "category": "rooms for rent",
+      "street_address": "234 Oak Lane, Greenfield, 98765",
+      "status": "available",
+      "price": 60,
+      "ownerName": "Michael Thompson",
+      "images": [
+        "https://images.pexels.com/photos/3736360/pexels-photo-3736360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "https://images.pexels.com/photos/3747928/pexels-photo-3747928.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "done",
+      "description": "A cozy guesthouse offering a homely atmosphere and personalized service."
+    },
+    {
+      "title": "Foodie Adventure Tour",
+      "category": "tour",
+      "street_address": "N/A",
+      "status": "available",
+      "price": 40,
+      "ownerName": "Olivia Scott",
+      "images": [
+        "https://img.freepik.com/free-photo/full-shot-smiley-woman-taking-food-photos_23-2149333783.jpg",
+        "https://images.pexels.com/photos/2862678/pexels-photo-2862678.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "not done",
+      "description": "Experience the local culinary scene with a guided food tour featuring tastings at popular eateries."
+    },
+    {
+      "title": "Tranquil Countryside B&B",
+      "category": "rooms for rent",
+      "street_address": "567 Country Rd, Farmland, 11111",
+      "status": "available",
+      "price": 70,
+      "ownerName": "Eleanor Wright",
+      "images": [
+        "https://q-xx.bstatic.com/xdata/images/hotel/max1280x900/301005664.jpg?k=19486cde4bd56f65f543805a769e9a7f449a4140285306aa77bc83d00289f452&o=",
+        "https://images.pexels.com/photos/1696910/pexels-photo-1696910.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "done",
+      "description": "A peaceful B&B surrounded by nature, offering homemade breakfasts and outdoor activities."
+    },
+    {
+      "title": "Cultural Heritage Tour",
+      "category": "tour",
+      "street_address": "N/A",
+      "status": "available",
+      "price": 35,
+      "ownerName": "Benjamin Carter",
+      "images": [
+        "https://c4.wallpaperflare.com/wallpaper/629/251/818/temple-virupaksha-temple-hampi-shiva-wallpaper-preview.jpg",
+        "https://images.pexels.com/photos/1723214/pexels-photo-1723214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "not done",
+      "description": "Dive into the city’s history and culture with a comprehensive guided tour."
+    },
+    {
+      "title": "Riverside Hostel",
+      "category": "hostel",
+      "street_address": "12 River Rd, Rivertown, 65401",
+      "status": "available",
+      "price": 28,
+      "ownerName": "Lucas James",
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQMfkZU9E9qUgr3UPwlCMTA1QTOfrG8xViww&s",
+        "https://images.pexels.com/photos/3035615/pexels-photo-3035615.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "done",
+      "description": "A vibrant hostel located by the river, ideal for outdoor enthusiasts and social travelers."
+    },
+    {
+      "title": "Urban Boutique Hotel",
+      "category": "hotel",
+      "street_address": "89 City Center, Metropolis, 11223",
+      "status": "available",
+      "price": 220,
+      "ownerName": "Sophia Brown",
+      "images": [
+        "https://www.kayak.co.in/rimg/himg/65/90/a4/expedia_group-2245999-987add-964657.jpg?width=1366&height=768&crop=true",
+        "https://images.pexels.com/photos/1864174/pexels-photo-1864174.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "done",
+      "description": "An upscale boutique hotel with contemporary design, located in the heart of the city."
+    },
+    {
+      "title": "Cozy Cabin Getaway",
+      "category": "rooms for rent",
+      "street_address": "88 Woods Rd, Timberland, 54321",
+      "status": "available",
+      "price": 90,
+      "ownerName": "Mia Parker",
+      "images": [
+        "https://images.pexels.com/photos/2106703/pexels-photo-2106703.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "https://images.pexels.com/photos/1704130/pexels-photo-1704130.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "done",
+      "description": "A charming cabin surrounded by nature, perfect for a romantic getaway or family retreat."
+    },
+    {
+      "title": "City Lights Night Tour",
+      "category": "tour",
+      "street_address": "N/A",
+      "status": "available",
+      "price": 50,
+      "ownerName": "Ava Green",
+      "images": [
+        "https://i.pinimg.com/736x/fc/03/d8/fc03d8342485241d00de94b16b8b69e7.jpg",
+        "https://images.pexels.com/photos/3531650/pexels-photo-3531650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "payment_status": "not done",
+      "description": "Experience the city’s vibrant nightlife with a guided tour to popular spots and hidden gems."
+    }
+  ]
+}
