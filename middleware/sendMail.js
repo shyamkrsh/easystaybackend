@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 
 const emailTemplatePath = path.join(__dirname, 'Email.html');
 
-module.exports.sendMail = async (receiverEnail, name, subject) => {
+module.exports.sendMail = async (receiverEmail, name, subject) => {
     fs.readFile(emailTemplatePath, 'utf8', (err, htmlContent) => {
         if (err) {
             console.error('Error reading HTML file:', err);
@@ -27,7 +27,7 @@ module.exports.sendMail = async (receiverEnail, name, subject) => {
 
         const mailOptions = {
             from: process.env.GMAIL_FROM,
-            to: receiverEnail,
+            to: receiverEmail,
             subject: subject,
             html: withDynamicContent,
         }

@@ -11,6 +11,6 @@ const upload = multer({storage});
 router.post("/signup", upload.single('image'), userController.signup);
 router.post("/login", userController.login);
 router.get("/user-details", authToken, userDetailsController);
-router.get("/logout", userController.logout);
+router.get("/logout",authToken, userController.logout);
 
 module.exports = router;  

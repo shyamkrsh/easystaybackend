@@ -27,15 +27,21 @@ module.exports.signup = async (req, res) => {
 
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(password, salt);
-        let newUser = new User({ profileImage: req.file.path, name: name, email: email, mobNumber: mobNumber, password: hashPassword });
-        await newUser.save().then((res) => {
+        let newUser = new User({ profileImage: req.file ? req.file.path : null, name: name, email: email, mobNumber: mobNumber, password: hashPassword });
+        await newUser.save().then(() => {
             req.user = newUser;
             sendMail(newUser.email, newUser.name, "Welcome to EasyStay !");
-            res.status(201).json(newUser);;
+            res.status(201).json({
+                message: "Login successfully",
+                data: newUser,
+                error: false,
+                success: true,
+            });;
         }).catch((err) => {
             throw new Error(err);
         })
     } catch (err) {
+        console.log(err)
         res.json({
             message: err.message || err,
             error: true,
