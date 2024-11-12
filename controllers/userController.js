@@ -73,8 +73,9 @@ module.exports.login = async (req, res) => {
             }
             const token = jwt.sign(tokenData, 'mysecret', { expiresIn: 7 * 24 * 60 * 60 * 1000 });
             const tokenOption = {
-                httpOnly: true,
+                // httpOnly: true,
                 secure: true,
+                sameSite: "None",
             }
             res.cookie("token", token, tokenOption).status(200).json({
                 message: 'Login successfully',
