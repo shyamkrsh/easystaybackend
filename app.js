@@ -22,7 +22,8 @@ async function main() {
 }
 
 app.use(cors({
-  origin: 'https://easystayngp.vercel.app',
+  origin: ['https://easystayngp.vercel.app'],
+  methods: ["get", "post", "put", "delete"],
   credentials: true, 
 }));
 app.use(express.json());
