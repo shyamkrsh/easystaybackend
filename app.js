@@ -23,7 +23,7 @@ async function main() {
 
 app.use(cors({
   origin: ['https://easystayngp.vercel.app'],
-  methods: ["get", "post", "put", "delete"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true, 
 }));
 app.use(express.json());
