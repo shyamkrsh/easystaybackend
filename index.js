@@ -22,7 +22,11 @@ async function main() {
 }
 
 app.use(cors({
-    origin: 'https://easystayngp.vercel.app', // Make sure the URL is correct without trailing slash
+    origin: [
+        'https://easystayngp.vercel.app',
+        'http://localhost:8080'
+    ],
+     // Make sure the URL is correct without trailing slash
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 }));
