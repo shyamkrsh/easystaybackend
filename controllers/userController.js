@@ -32,7 +32,7 @@ module.exports.signup = async (req, res) => {
             req.user = newUser;
             sendMail(newUser.email, newUser.name, "Welcome to EasyStay !");
             res.status(201).json({
-                message: "Login successfully",
+                message: "Signup successfully",
                 data: newUser,
                 error: false,
                 success: true,

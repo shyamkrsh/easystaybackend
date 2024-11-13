@@ -21,11 +21,8 @@ async function main() {
     });
 }
 
-app.use(cors({
-    origin: ["https://easystayngp@gmail.com"],
-    methods: ["get", "post", "delete", "put"],
-    credentials: true,
-}));
+app.use(cors());
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}))

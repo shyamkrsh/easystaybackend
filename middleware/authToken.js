@@ -9,7 +9,7 @@ async function authToken(req, res, next) {
             return res.json({
                 message: "User not login",
                 error: true,
-                sucess: false,
+                sucsess: false,
             })
         }
         jwt.verify(token, 'mysecret', function (err, decoded) {
