@@ -24,7 +24,7 @@ async function main() {
 app.use(cors({
     origin: [
         'https://easystayngp.vercel.app',
-        'http://localhost:8080'
+        'http://localhost:5173'
     ],
      // Make sure the URL is correct without trailing slash
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
