@@ -100,12 +100,21 @@ module.exports.login = async (req, res) => {
 
 module.exports.logout = async (req, res) => {
     try {
-        res.clearCookie('token');
-        res.status(200).json({
-            message: "Logged out successfully",
-            error: false,
-            success: true,
-            data: [],
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(500).json({
+                    message: err.message || "An error occurred during logout",
+                    error: true,
+                    success: false,
+                });
+            }
+            res.clearCookie('token', { path: '/', secure: true, sameSite: 'None' });
+            res.status(200).json({
+                message: "Logged out successfully",
+                error: false,
+                success: true,
+                data: [],
+            });
         });
     } catch (err) {
         res.status(500).json({
