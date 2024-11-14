@@ -23,9 +23,8 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    coordinates: {
-        latitude: Number,
-        longitude: Number,
+    location: {
+        type: String,
     },
     posts: [
         {
