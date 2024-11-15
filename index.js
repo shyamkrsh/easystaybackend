@@ -27,7 +27,7 @@ app.use(cors({
         'http://localhost:5173'
     ],
      // Make sure the URL is correct without trailing slash
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST','PATCH', 'PUT', 'DELETE'],
     credentials: true,
 }));
 
