@@ -157,7 +157,7 @@ module.exports.editListing = async (req, res) => {
 
     try {
         let data = req.body;
-        let updatedListing = await Listing.findOneAndUpdate(id, {
+        let updatedListing = await Listing.findOneAndUpdate({ _id: id }, {
             title: data.title,
             category: data.category,
             location: data.location,
@@ -166,7 +166,8 @@ module.exports.editListing = async (req, res) => {
             owner: req.userId,
             payment: data.payment,
             description: data.description,
-        }
+        },
+            { new: true },
         )
         updatedListing.images.push({ url: req?.files[0]?.path, filename: req?.files[0]?.filename })
         updatedListing.images.push({ url: req?.files[1]?.path, filename: req?.files[1]?.filename })
