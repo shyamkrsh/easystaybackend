@@ -4,8 +4,8 @@ const User = require("../models/User");
 
 module.exports.showAllListings = async (req, res) => {
     try {
-        const {category} = req.params;
-        const listings = await Listing.find({category: category});
+        const { category } = req.params;
+        const listings = await Listing.find({ category: category });
         res.status(200).json({
             message: "Sending Data",
             data: listings,
@@ -112,7 +112,7 @@ module.exports.getClients = async (req, res) => {
     try {
         const { id } = req.params;
         const user = await User.findById(id).populate("clients");
-        
+
         res.status(200).json({
             message: "Sending Data",
             data: user,
@@ -120,7 +120,7 @@ module.exports.getClients = async (req, res) => {
             success: true,
         })
 
-    }catch(err){
+    } catch (err) {
         res.status(400).json({
             message: err.message || err,
             data: [],
@@ -130,19 +130,58 @@ module.exports.getClients = async (req, res) => {
     }
 }
 
-module.exports.deleteListing = async(req, res) => {
-    try{
-        const {id} = req.params;
+module.exports.deleteListing = async (req, res) => {
+    try {
+        const { id } = req.params;
         const listing = await Listing.findByIdAndDelete(id);
-       
+
         res.status(200).json({
             message: "Listing Deleted Successfully",
             data: listing,
-            error : false,
+            error: false,
             success: true,
         })
 
-    }catch(err){
+    } catch (err) {
+        res.status(400).json({
+            message: err.message || err,
+            data: [],
+            error: true,
+            success: false,
+        })
+    }
+}
+
+module.exports.editListing = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        let data = req.body;
+        let updatedListing = await Listing.findByIdAndUpdate(id, {
+            title: data.title,
+            category: data.category,
+            location: data.location,
+            availability: data.availability,
+            price: data.price,
+            owner: req.userId,
+            payment: data.payment,
+            description: data.description,
+        },
+        {new: true}
+        )
+        updatedListing.images.push({ url: req.files[0].path, filename: req.files[0].filename })
+        updatedListing.images.push({ url: req.files[1].path, filename: req.files[1].filename })
+        updatedListing.images.push({ url: req.files[2].path, filename: req.files[2].filename })
+        updatedListing.images.push({ url: req.files[3].path, filename: req.files[3].filename })
+
+        await updatedListing.save();
+        res.status(200).json({
+            message: "Listing Updated successfully",
+            data: updatedListing,
+            error: false,
+            success: true,
+        })
+    } catch (err) {
         res.status(400).json({
             message: err.message || err,
             data: [],

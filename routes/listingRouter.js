@@ -13,5 +13,6 @@ router.get("/:authorId", listingController.getAuthorListing);
 router.get("/:id/show", listingController.showOneListing);
 router.get("/:id/clients", listingController.getClients);
 router.delete("/:id/delete", authToken, listingController.deleteListing);
+router.patch("edit/:id", authToken, listingController.editListing);
 
 module.exports = router;
