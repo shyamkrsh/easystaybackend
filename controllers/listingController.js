@@ -169,10 +169,10 @@ module.exports.editListing = async (req, res) => {
         },
         {new: true}
         )
-        updatedListing.images.push({ url: req.files[0].path, filename: req.files[0].filename })
-        updatedListing.images.push({ url: req.files[1].path, filename: req.files[1].filename })
-        updatedListing.images.push({ url: req.files[2].path, filename: req.files[2].filename })
-        updatedListing.images.push({ url: req.files[3].path, filename: req.files[3].filename })
+        updatedListing.images.push({ url: req?.files[0]?.path, filename: req?.files[0]?.filename })
+        updatedListing.images.push({ url: req?.files[1]?.path, filename: req?.files[1]?.filename })
+        updatedListing.images.push({ url: req?.files[2]?.path, filename: req?.files[2]?.filename })
+        updatedListing.images.push({ url: req?.files[3]?.path, filename: req?.files[3]?.filename })
 
         await updatedListing.save();
         res.status(200).json({
