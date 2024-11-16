@@ -57,50 +57,44 @@ module.exports.signup = async (req, res) => {
 module.exports.login = async (req, res) => {
     try {
         let { email, password } = req.body;
-        if (!email) {
-            throw new Error("Email is missing");
-        }
-        if (!password) {
-            throw new Error("Password is missing");
-        }
-        const user = await User.findOne({ email: email });
-        if (!user) {
-            throw new Error("User not registered");
-        }
+        if (!email) throw new Error("Email is missing");
+        if (!password) throw new Error("Password is missing");
+
+        const user = await User.findOne({ email });
+        if (!user) throw new Error("User not registered");
 
         const checkPassword = await bcrypt.compare(password, user.password);
-        if (checkPassword) {
-            const tokenData = {
-                _id: user._id,
-                email: user.email,
-            }
-            const token = jwt.sign(tokenData, 'mysecret', { expiresIn: 604800  });
-            const tokenOption = {
-                httpOnly: true,
-                secure: true,
-                sameSite: "None",
-                
-            }
-            res.cookie("token", token, tokenOption).status(200).json({
-                message: 'Login successfully',
-                data: token,
-                success: true,
-                error: false,
-            })
-        } else {
-            throw new Error("Please check Password");
-        }
+        if (!checkPassword) throw new Error("Please check Password");
+
+        const tokenData = {
+            _id: user._id,
+            email: user.email,
+        };
+        const token = jwt.sign(tokenData, 'mysecret', { expiresIn: 604800 }); // 7 days
+
+        const isProduction = process.env.NODE_ENV === "production";
+        const tokenOption = {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "None" : "Lax",
+        };
+
+        res.cookie("token", token, tokenOption).status(200).json({
+            message: 'Login successfully',
+            data: token,
+            success: true,
+            error: false,
+        });
 
     } catch (err) {
-        res.json({
+        console.error("Login error:", err);
+        res.status(400).json({
             message: err.message || err,
             error: true,
             success: false,
-        })
+        });
     }
-
-
-}
+};
 
 module.exports.logout = async (req, res) => {
     try {
