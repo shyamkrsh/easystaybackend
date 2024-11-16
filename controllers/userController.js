@@ -1,7 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { sendMail, forgetMail } = require("../middleware/sendMail");
+const { sendMail} = require("../middleware/sendMail");
+const {forgetMail} = require("../middleware/forgetMail");
 const Listing = require("../models/Listing");
 
 
@@ -77,7 +78,8 @@ module.exports.login = async (req, res) => {
             const tokenOption = {
                 httpOnly: true,
                 secure: true,
-                sameSite: "Lax"
+                sameSite: "Lax",
+                
             }
             res.cookie("token", token, tokenOption).status(200).json({
                 message: 'Login successfully',
@@ -128,10 +130,14 @@ module.exports.forgetPassword = async(req, res) => {
         }
         let otp = Math.floor(100000 + Math.random() * 900000).toString();
         forgetMail(user.email, user.name, otp);
-        // const salt = bcrypt.genSaltSync(10);
-        // const hashPassword = bcrypt.hashSync(password, salt);
-        // user.password = 
+        
 
+        res.status(200).json({
+            message: "Password Changed successfully",
+            data: user,
+            error: false,
+            success: true,
+        })
     }catch(err){
         res.json({
             message: err.message || err,
