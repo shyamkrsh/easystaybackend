@@ -120,30 +120,30 @@ module.exports.logout = async (req, res) => {
     }
 };
 
-module.exports.forgetPassword = async(req, res) => {
-    try{
-        let {email} = req.body;
+// module.exports.forgetPassword = async(req, res) => {
+//     try{
+//         let {email} = req.body;
 
-        const user = await User.findOne({email: email});
-        if(!user){
-            throw new Error("User not registered");
-        }
-        let otp = Math.floor(100000 + Math.random() * 900000).toString();
-        // forgetMail(user.email, user.name, otp);
+//         const user = await User.findOne({email: email});
+//         if(!user){
+//             throw new Error("User not registered");
+//         }
+//         let otp = Math.floor(100000 + Math.random() * 900000).toString();
+//         // forgetMail(user.email, user.name, otp);
         
 
-        res.status(200).json({
-            message: "Password Changed successfully",
-            data: user,
-            error: false,
-            success: true,
-        })
-    }catch(err){
-        res.json({
-            message: err.message || err,
-            data: [],
-            error: true,
-            success: false,
-        })
-    }
-}
+//         res.status(200).json({
+//             message: "Password Changed successfully",
+//             data: user,
+//             error: false,
+//             success: true,
+//         })
+//     }catch(err){
+//         res.json({
+//             message: err.message || err,
+//             data: [],
+//             error: true,
+//             success: false,
+//         })
+//     }
+// }
