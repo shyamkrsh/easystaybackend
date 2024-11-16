@@ -1,7 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { sendMail } = require("../middleware/sendMail");
+const { sendMail, forgetMail } = require("../middleware/sendMail");
+const Listing = require("../models/Listing");
 
 
 
@@ -117,3 +118,26 @@ module.exports.logout = async (req, res) => {
     }
 };
 
+module.exports.forgetPassword = async(req, res) => {
+    try{
+        let {email} = req.body;
+
+        const user = await User.findOne({email: email});
+        if(!user){
+            throw new Error("User not registered");
+        }
+        let otp = Math.floor(100000 + Math.random() * 900000).toString();
+        forgetMail(user.email, user.name, otp);
+        // const salt = bcrypt.genSaltSync(10);
+        // const hashPassword = bcrypt.hashSync(password, salt);
+        // user.password = 
+
+    }catch(err){
+        res.json({
+            message: err.message || err,
+            data: [],
+            error: true,
+            success: false,
+        })
+    }
+}
