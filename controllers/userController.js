@@ -2,7 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { sendMail} = require("../middleware/sendMail");
-const {forgetMail} = require("../middleware/forgetMail");
+// const {forgetMail} = require("../middleware/forgetMail")
 const Listing = require("../models/Listing");
 
 
@@ -129,7 +129,7 @@ module.exports.forgetPassword = async(req, res) => {
             throw new Error("User not registered");
         }
         let otp = Math.floor(100000 + Math.random() * 900000).toString();
-        forgetMail(user.email, user.name, otp);
+        // forgetMail(user.email, user.name, otp);
         
 
         res.status(200).json({
