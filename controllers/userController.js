@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { sendMail} = require("../middleware/sendMail");
+const { sendMail } = require("../middleware/sendMail");
 // const {forgetMail} = require("../middleware/forgetMail")
 const Listing = require("../models/Listing");
 
@@ -70,7 +70,7 @@ module.exports.login = async (req, res) => {
             _id: user._id,
             email: user.email,
         };
-        const token = jwt.sign(tokenData, 'mysecret', { expiresIn: 604800 }); // 7 days
+        const token = jwt.sign(tokenData, 'mysecretStringyoucantchanged', { expiresIn: 604800 }); // 7 days
 
         const isProduction = process.env.NODE_ENV === "production";
         const tokenOption = {
@@ -114,12 +114,12 @@ module.exports.logout = async (req, res) => {
     }
 };
 
-module.exports.forgetPassword = async(req, res) => {
-    try{
-        let {email} = req.body;
+module.exports.forgetPassword = async (req, res) => {
+    try {
+        let { email } = req.body;
 
-        const user = await User.findOne({email: email});
-        if(!user){
+        const user = await User.findOne({ email: email });
+        if (!user) {
             throw new Error("User not registered");
         }
         let currPassword = Math.floor(100000 + Math.random() * 900000).toString();
@@ -135,7 +135,7 @@ module.exports.forgetPassword = async(req, res) => {
             error: false,
             success: true,
         })
-    }catch(err){
+    } catch (err) {
         res.json({
             message: err.message || err,
             data: [],
@@ -143,4 +143,42 @@ module.exports.forgetPassword = async(req, res) => {
             success: false,
         })
     }
+}
+
+module.exports.changePassword = async (req, res) => {
+    try {
+        let { id } = req.params;
+        let { email, oldpassword, newpassword } = req.body;
+
+        let user = await User.findById(id);
+        if (!user) {
+            throw new Error(401, "UnAuthorized access");
+        }
+
+        const checkPassword = await bcrypt.compare(oldpassword, user.password);
+        if (!checkPassword) throw new Error("Please check Password");
+
+        if (checkPassword) {
+            const salt = bcrypt.genSaltSync(10);
+            const hashPassword = bcrypt.hashSync(newpassword, salt);
+            user.password = hashPassword;
+            await user.save().then(() => {
+                res.status(200).json({
+                    message: "Password changed successfully",
+                    data: user,
+                    error: false,
+                    success: true,
+                })
+            })
+        }
+
+    } catch (err) {
+        res.json({
+            message: err.message || err,
+            data: [],
+            error: true,
+            success: false,
+        })
+    }
+
 }
