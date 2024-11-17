@@ -1,37 +1,37 @@
-// const nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer");
 
-// require("dotenv").config();
-
-
-// const transporter = nodemailer.createTransport({
-//   host: 'smtp.gmail.com',
-//   secure: true,
-//   auth: {
-//     user: process.env.GMAIL_USER,
-//     pass: process.env.GMAIL_PASS,
-//   }
-// })
+require("dotenv").config();
 
 
-// module.exports.forgetMail = async (receiever, name, currPassword, forgetLink) => {
-//   const htmlContent = `
-//   <p>Hi ${name},</p>
-//   <p>You requested to reset your password. Your current password is <strong>${currPassword}</strong>.</p>
-//   <p>Click the link below to reset your password:</p>
-//   <a href="${forgetLink}" target="_blank">${forgetLink}</a>
-//   <p>If you did not request this, please ignore this email.</p>
-//   <p>Thanks,</p>
-//   <p>EasyStay Team</p>
-// `;
-//   const info = await transporter.sendMail({
-//     from: process.env.GMAIL_USER,
-//     to: receiever,
-//     subject: "Forget Password",
-//     html: htmlContent,
-//   });
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  secure: true,
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS,
+  }
+})
 
-//   return info;
 
-// }
+module.exports.forgetMail = async (receiever, name, currPassword, forgetLink) => {
+  const htmlContent = `
+  <p>Hi ${name},</p>
+  <p>You requested to reset your password. Your current password is <strong>${currPassword}</strong>.</p>
+  <p>Click the link below to reset your password:</p>
+  <a href="${forgetLink}" target="_blank">${forgetLink}</a>
+  <p>If you did not request this, please ignore this email.</p>
+  <p>Thanks,</p>
+  <p>EasyStay Team</p>
+`;
+  const info = await transporter.sendMail({
+    from: process.env.GMAIL_USER,
+    to: receiever,
+    subject: "Forget Password",
+    html: htmlContent,
+  });
 
-// forgetMail("sksh58573@gmail.com", "Shyam Kumar Sharma", 123456);
+  return info;
+
+}
+
+forgetMail("sksh58573@gmail.com", "Shyam Kumar Sharma", 123456);
