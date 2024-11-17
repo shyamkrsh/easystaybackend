@@ -29,6 +29,7 @@ app.use(cors({
      // Make sure the URL is correct without trailing slash
     methods: ['GET', 'POST','PATCH', 'PUT', 'DELETE'],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
 app.use(express.json());
