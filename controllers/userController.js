@@ -112,16 +112,17 @@ module.exports.login = async (req, res) => {
         });
 
         // Cookie options
-        const isProduction = process.env.NODE_ENV === "production";
-        const cookieOptions = {
+        
+        const tokenOptions = {
             httpOnly: true,
-            secure: isProduction,
-            sameSite: isProduction ? "None" : "Lax",
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+            secure: process.env.NODE_ENV === "production", // Requires HTTPS in production
+            
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         };
+        
 
         // Set the cookie and send response
-        res.cookie("token", token, cookieOptions).status(200).json({
+        res.cookie("token", token, tokenOptions).status(200).json({
             message: "Login successful",
             data: { token }, // Token is also sent in response for convenience
             success: true,

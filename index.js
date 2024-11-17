@@ -21,16 +21,14 @@ async function main() {
     });
 }
 
-app.use(cors({
-    origin: [
-        'https://easystayngp.vercel.app',
-        'http://localhost:5173'
-    ],
-     // Make sure the URL is correct without trailing slash
-    methods: ['GET', 'POST','PATCH', 'PUT', 'DELETE'],
-    credentials: true,
-    
-}));
+const corsOptions = {
+    origin: "https://easystayngp.vercel.app", // Replace with your frontend domain
+    credentials: true, // Allow cookies
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+};
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
