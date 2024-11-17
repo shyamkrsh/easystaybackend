@@ -103,16 +103,16 @@ module.exports.login = async (req, res) => {
             _id: user._id,
             email: user.email,
         };
-        const token = jwt.sign(tokenData, process.env.JWT_SECRET || "mysecretStringyoucantchanged", {
+        const token = jwt.sign(tokenData, "mysecretjwt" || "mysecretStringyoucantchanged", {
             expiresIn: "7d", // 7 days
         });
 
         // Cookie options
-        const isProduction = process.env.NODE_ENV === "production";
+       
         const cookieOptions = {
             httpOnly: true,
-            secure: isProduction,
-            sameSite: isProduction ? "None" : "Lax",
+            secure: true,
+            sameSite: "Lax",
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
         };
 
