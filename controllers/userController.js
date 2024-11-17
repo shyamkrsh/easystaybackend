@@ -58,6 +58,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User"); // Adjust the path to your User model as needed
 
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const User = require("../models/User"); // Adjust the path to your User model as needed
+
 module.exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -103,16 +107,16 @@ module.exports.login = async (req, res) => {
             _id: user._id,
             email: user.email,
         };
-        const token = jwt.sign(tokenData, "mysecretjwt" || "mysecretStringyoucantchanged", {
+        const token = jwt.sign(tokenData, process.env.JWT_SECRET || "mysecretStringyoucantchanged", {
             expiresIn: "7d", // 7 days
         });
 
         // Cookie options
-       
+        const isProduction = process.env.NODE_ENV === "production";
         const cookieOptions = {
             httpOnly: true,
-            secure: true,
-            sameSite: "None",
+            secure: isProduction,
+            sameSite: isProduction ? "None" : "Lax",
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
         };
 
@@ -133,6 +137,7 @@ module.exports.login = async (req, res) => {
         });
     }
 };
+
 
 
 module.exports.logout = async (req, res) => {
