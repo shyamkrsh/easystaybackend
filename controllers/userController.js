@@ -116,7 +116,6 @@ module.exports.login = async (req, res) => {
         const tokenOptions = {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production", // Requires HTTPS in production
-            
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         };
         
