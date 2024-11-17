@@ -6,6 +6,7 @@ const User = require("../models/User");
 module.exports.createReviews = async (req, res) => {
     try {
         const currUser = await User.findById(req.userId);
+       
         const { id } = req.params;
         const newReviews = new Review({
             content: req.body.content,

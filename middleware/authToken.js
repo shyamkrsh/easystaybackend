@@ -6,11 +6,7 @@ async function authToken(req, res, next) {
 
         const token = req.cookies?.token ;
         if (!token) {
-            return res.json({
-                message: "User not login",
-                error: true,
-                sucsess: false,
-            })
+            throw new Error("User not login")
         }
         jwt.verify(token, 'mysecret', function (err, decoded) {
             if(err){
