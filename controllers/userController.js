@@ -62,7 +62,6 @@ module.exports.login = async (req, res) => {
         if (!password) {
             throw new Error("Password is missing")
         }
-
         // Find user by email
         const user = await User.findOne({ email });
         if (!user) {

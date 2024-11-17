@@ -12,6 +12,6 @@ router.post("/signup", upload.single('image'), userController.signup);
 router.post("/login", userController.login);
 router.get("/user-details", authToken, userDetailsController);
 router.post("/logout", authToken, userController.logout);
-router.post("/forgetPassword", userController.forgetPassword);
-router.post("/changePassword/:id", userController.changePassword);
+// router.post("/forgetPassword", userController.forgetPassword);
+// router.post("/changePassword/:id", userController.changePassword);
 module.exports = router; 
