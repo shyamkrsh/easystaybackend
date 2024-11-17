@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { sendMail } = require("../middleware/sendMail");
 // const {forgetMail} = require("../middleware/forgetMail")
-const Listing = require("../models/Listing");
+
 
 
 module.exports.signup = async (req, res) => {

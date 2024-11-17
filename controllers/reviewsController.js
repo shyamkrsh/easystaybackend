@@ -6,14 +6,13 @@ const User = require("../models/User");
 module.exports.createReviews = async (req, res) => {
     try {
         const currUser = await User.findById(req.userId);
-       
         const { id } = req.params;
+        let listing = await Listing.findById(id);
         const newReviews = new Review({
             content: req.body.content,
             rating: req.body.rating,
             author: currUser,
         })
-        let listing = await Listing.findById(id);
         listing.reviews.push(newReviews);
         await newReviews.save();
         await listing.save();
