@@ -6,8 +6,6 @@ const { sendMail } = require("../middleware/sendMail");
 const Listing = require("../models/Listing");
 
 
-
-
 module.exports.signup = async (req, res) => {
     try {
         let { profileImage, name, email, mobNumber, password } = req.body;
@@ -131,71 +129,71 @@ module.exports.logout = async (req, res) => {
     }
 };
 
-module.exports.forgetPassword = async (req, res) => {
-    try {
-        let { email } = req.body;
+// module.exports.forgetPassword = async (req, res) => {
+//     try {
+//         let { email } = req.body;
 
-        const user = await User.findOne({ email: email });
-        if (!user) {
-            throw new Error("User not registered");
-        }
-        let currPassword = Math.floor(100000 + Math.random() * 900000).toString();
-        const salt = bcrypt.genSaltSync(10);
-        const hashPassword = bcrypt.hashSync(currPassword, salt);
-        forgetMail(user.email, user.name, currPassword, `https://easystayngp.vercel.app/api/changePassword/${user._id}`);
-        user.password = hashPassword;
-        await user.save();
+//         const user = await User.findOne({ email: email });
+//         if (!user) {
+//             throw new Error("User not registered");
+//         }
+//         let currPassword = Math.floor(100000 + Math.random() * 900000).toString();
+//         const salt = bcrypt.genSaltSync(10);
+//         const hashPassword = bcrypt.hashSync(currPassword, salt);
+//         forgetMail(user.email, user.name, currPassword, `https://easystayngp.vercel.app/api/changePassword/${user._id}`);
+//         user.password = hashPassword;
+//         await user.save();
 
-        res.status(200).json({
-            message: "Password Changed successfully",
-            data: user,
-            error: false,
-            success: true,
-        })
-    } catch (err) {
-        res.json({
-            message: err.message || err,
-            data: [],
-            error: true,
-            success: false,
-        })
-    }
-}
+//         res.status(200).json({
+//             message: "Password Changed successfully",
+//             data: user,
+//             error: false,
+//             success: true,
+//         })
+//     } catch (err) {
+//         res.json({
+//             message: err.message || err,
+//             data: [],
+//             error: true,
+//             success: false,
+//         })
+//     }
+// }
 
-module.exports.changePassword = async (req, res) => {
-    try {
-        let { id } = req.params;
-        let { email, oldpassword, newpassword } = req.body;
+// module.exports.changePassword = async (req, res) => {
+//     try {
+//         let { id } = req.params;
+//         let { email, oldpassword, newpassword } = req.body;
 
-        let user = await User.findById(id);
-        if (!user) {
-            throw new Error(401, "UnAuthorized access");
-        }
+//         let user = await User.findById(id);
+//         if (!user) {
+//             throw new Error(401, "UnAuthorized access");
+//         }
 
-        const checkPassword = await bcrypt.compare(oldpassword, user.password);
-        if (!checkPassword) throw new Error("Please check Password");
+//         const checkPassword = await bcrypt.compare(oldpassword, user.password);
+//         if (!checkPassword) throw new Error("Please check Password");
 
-        if (checkPassword) {
-            const salt = bcrypt.genSaltSync(10);
-            const hashPassword = bcrypt.hashSync(newpassword, salt);
-            user.password = hashPassword;
-            await user.save().then(() => {
-                res.status(200).json({
-                    message: "Password changed successfully",
-                    data: user,
-                    error: false,
-                    success: true,
-                })
-            })
-        }
+//         if (checkPassword) {
+//             const salt = bcrypt.genSaltSync(10);
+//             const hashPassword = bcrypt.hashSync(newpassword, salt);
+//             user.password = hashPassword;
+//             await user.save().then(() => {
+//                 res.status(200).json({
+//                     message: "Password changed successfully",
+//                     data: user,
+//                     error: false,
+//                     success: true,
+//                 })
+//             })
+//         }
 
-    } catch (err) {
-        res.json({
-            message: err.message || err,
-            data: [],
-            error: true,
-            success: false,
-        })
-    }
+//     } catch (err) {
+//         res.json({
+//             message: err.message || err,
+//             data: [],
+//             error: true,
+//             success: false,
+//         })
+//     }
 
-}
+// }

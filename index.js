@@ -23,8 +23,8 @@ async function main() {
 
 app.use(cors({
     origin: [
-        "https://easystayngp.vercel.com",
-        " http://localhost:5173"
+        "https://easystayngp.vercel.app",
+        "http://localhost:5173"
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
