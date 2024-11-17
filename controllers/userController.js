@@ -54,42 +54,21 @@ module.exports.signup = async (req, res) => {
 
 }
 
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User"); // Adjust the path to your User model as needed
-
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User"); // Adjust the path to your User model as needed
-
 module.exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Validate request data
         if (!email) {
-            return res.status(400).json({ 
-                message: "Email is required", 
-                error: true, 
-                success: false 
-            });
+            throw new Error("Email is missing")
         }
         if (!password) {
-            return res.status(400).json({ 
-                message: "Password is required", 
-                error: true, 
-                success: false 
-            });
+            throw new Error("Password is missing")
         }
 
         // Find user by email
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).json({ 
-                message: "User not registered", 
-                error: true, 
-                success: false 
-            });
+            throw new Error("User not registered")
         }
 
         // Compare passwords
@@ -107,29 +86,25 @@ module.exports.login = async (req, res) => {
             _id: user._id,
             email: user.email,
         };
-        const token = jwt.sign(tokenData, process.env.JWT_SECRET || "mysecretStringyoucantchanged", {
-            expiresIn: "7d", // 7 days
+        const token = jwt.sign(tokenData,"mysecretStringyoucantchanged", {
+            expiresIn: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
 
-        // Cookie options
         
         const tokenOptions = {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // Requires HTTPS in production
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            secure: true, 
+            sameSite: "None"
         };
         
-
-        // Set the cookie and send response
         res.cookie("token", token, tokenOptions).status(200).json({
             message: "Login successful",
-            data: { token }, // Token is also sent in response for convenience
+            data: user,
             success: true,
             error: false,
         });
 
     } catch (err) {
-        console.error("Login error:", err);
         res.status(500).json({
             message: "An error occurred during login",
             error: true,
@@ -137,8 +112,6 @@ module.exports.login = async (req, res) => {
         });
     }
 };
-
-
 
 module.exports.logout = async (req, res) => {
     try {
