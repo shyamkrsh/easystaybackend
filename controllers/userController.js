@@ -122,10 +122,10 @@ module.exports.forgetPassword = async(req, res) => {
         if(!user){
             throw new Error("User not registered");
         }
-        let otp = Math.floor(100000 + Math.random() * 900000).toString();
+        let currPassword = Math.floor(100000 + Math.random() * 900000).toString();
         const salt = bcrypt.genSaltSync(10);
-        const hashPassword = bcrypt.hashSync(otp, salt);
-        forgetMail(user.email, user.name, otp);
+        const hashPassword = bcrypt.hashSync(currPassword, salt);
+        forgetMail(user.email, user.name, currPassword, `https://easystayngp.vercel.app/api/changePassword/${user._id}`);
         user.password = hashPassword;
         await user.save();
 
