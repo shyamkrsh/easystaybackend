@@ -4,11 +4,15 @@ const jwt = require("jsonwebtoken");
 async function authToken(req, res, next) {
     try {
 
-        const token = req.cookies?.token ;
+        const token = req?.cookies?.token ;
         if (!token) {
-            throw new Error("User not login")
+            return res.json({
+                message: "User not login",
+                error: true,
+                sucsess: false,
+            })
         }
-        jwt.verify(token, 'mysecret', function (err, decoded) {
+        jwt.verify(token, 'mysecretStringyoucantchanged', function (err, decoded) {
             if(err){
                 console.log("Error auth", err);
             }
