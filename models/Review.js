@@ -21,7 +21,7 @@ const reviewsSchema = new Schema({
         ref: "User",
     },
     createdAt: {
-        type: Date,
+        type: String,
         default: getFormattedDate(),
     }
 })
