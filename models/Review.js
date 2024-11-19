@@ -22,7 +22,7 @@ const reviewsSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: getFormattedDate,
+        default: getFormattedDate(),
     }
 })
 
