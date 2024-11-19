@@ -17,7 +17,7 @@ const reviewsSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace(',', ''),
+        default: new Date(),
     }
 })
 
