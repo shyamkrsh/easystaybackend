@@ -47,6 +47,7 @@ app.use("/api/reviews", reviewsRouter);
 app.use("/api/application", applicationRouter);
 app.use("/api/contact", contactRouter);
 
+
 // payment
 
 
@@ -54,6 +55,38 @@ const razorpay = new Razorpay({
     key_id: process.env.RAJORPAY_KEY_ID,
     key_secret: process.env.RAJORPAY_SECRET,
 });
+
+app.post("/create-owner", async (req, res) => {
+    const { name, email, contact } = req.body;
+  
+    try {
+      const contactResponse = await razorpay.contacts.create({
+        name,
+        email,
+        contact,
+        type: "customer",
+      });
+  
+      const fundAccountResponse = await razorpay.fund_accounts.create({
+        contact_id: contactResponse.id,
+        account_type: "bank_account",
+        bank_account: {
+          name,
+          ifsc: "HDFC0001234", // Replace with actual IFSC code
+          account_number: "1234567890", // Replace with actual account number
+        },
+      });
+  
+      res.status(201).json({
+        success: true,
+        contact: contactResponse,
+        fundAccount: fundAccountResponse,
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
+  
 
 app.post("/create-order", async (req, res) => {
     try {
