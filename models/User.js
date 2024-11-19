@@ -43,7 +43,8 @@ const userSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Report',
         }
-    ]
+    ],
+ 
 })
 
 userSchema.post('findOneAndDelete', async (user) => {

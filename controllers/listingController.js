@@ -1,5 +1,6 @@
 const Listing = require("../models/Listing");
 const User = require("../models/User");
+const cloudinary = require('cloudinary').v2;
 
 
 module.exports.showAllListings = async (req, res) => {
@@ -134,14 +135,20 @@ module.exports.deleteListing = async (req, res) => {
     try {
         const { id } = req.params;
         const listing = await Listing.findByIdAndDelete(id);
-
-        res.status(200).json({
-            message: "Listing Deleted Successfully",
-            data: listing,
-            error: false,
-            success: true,
-        })
-
+        if (listing) {
+            await cloudinary.uploader.destroy(listing.images[0].filename);
+            await cloudinary.uploader.destroy(listing.images[1].filename);
+            await cloudinary.uploader.destroy(listing.images[2].filename);
+            await cloudinary.uploader.destroy(listing.images[3].filename);
+            res.status(200).json({
+                message: "Listing Deleted Successfully",
+                data: listing,
+                error: false,
+                success: true,
+            })
+        }else{
+            throw new Error("Services not exists");
+        }
     } catch (err) {
         res.status(400).json({
             message: err.message || err,
