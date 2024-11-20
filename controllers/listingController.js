@@ -134,8 +134,8 @@ module.exports.getClients = async (req, res) => {
 module.exports.deleteListing = async (req, res) => {
     try {
         const { id } = req.params;
-        const listing = await Listing.findByIdAndDelete(id);
-        if (listing) {
+        let list = await Listing.findById(id);
+        if (list) {
             await cloudinary.uploader.destroy(listing.images[0].filename);
             await cloudinary.uploader.destroy(listing.images[1].filename);
             await cloudinary.uploader.destroy(listing.images[2].filename);
@@ -146,9 +146,14 @@ module.exports.deleteListing = async (req, res) => {
                 error: false,
                 success: true,
             })
-        }else{
+
+            const listing = await Listing.findByIdAndDelete(id);
+
+        } else {
             throw new Error("Services not exists");
         }
+
+
     } catch (err) {
         res.status(400).json({
             message: err.message || err,
@@ -161,7 +166,6 @@ module.exports.deleteListing = async (req, res) => {
 
 module.exports.editListing = async (req, res) => {
     const { id } = req.params;
-
     try {
         let data = req.body;
         let updatedListing = await Listing.findOneAndUpdate({ _id: id }, {
