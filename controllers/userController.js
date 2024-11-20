@@ -133,7 +133,7 @@ module.exports.forgetPassword = async (req, res) => {
         let currPassword = Math.floor(100000 + Math.random() * 900000).toString();
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(currPassword, salt);
-        forgetMail(user.email, user.name, currPassword, `https://easystayngp.vercel.app/api/changePassword/${user._id}`);
+        forgetMail(user.email, user.name, currPassword, `https://easystayngp.vercel.app/api/changePassword`);
         user.password = hashPassword;
         await user.save();
         res.status(200).json({
