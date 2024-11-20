@@ -98,7 +98,7 @@ module.exports.login = async (req, res) => {
 
     } catch (err) {
         res.status(500).json({
-            message: "An error occurred during login",
+            message:err.message || err,
             error: true,
             success: false,
         });
