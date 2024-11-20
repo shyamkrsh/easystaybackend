@@ -140,6 +140,7 @@ module.exports.deleteListing = async (req, res) => {
             await cloudinary.uploader.destroy(list.images[1].filename);
             await cloudinary.uploader.destroy(list.images[2].filename);
             await cloudinary.uploader.destroy(list.images[3].filename);
+            const listing = await Listing.findByIdAndDelete(id);
             res.status(200).json({
                 message: "Listing Deleted Successfully",
                 data: listing,
@@ -147,7 +148,6 @@ module.exports.deleteListing = async (req, res) => {
                 success: true,
             })
 
-            const listing = await Listing.findByIdAndDelete(id);
 
         } else {
             throw new Error("Services not exists");
