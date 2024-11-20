@@ -33,5 +33,3 @@ module.exports.forgetMail = async (receiever, name, currPassword, forgetLink) =>
   return info;
 
 }
-
-forgetMail("sksh58573@gmail.com", "Shyam Kumar Sharma", 123456);

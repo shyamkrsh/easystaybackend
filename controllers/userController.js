@@ -2,8 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { sendMail } = require("../middleware/sendMail");
-// const {forgetMail} = require("../middleware/forgetMail")
-
+const {forgetMail} = require("../middleware/forgetMail")
 
 
 module.exports.signup = async (req, res) => {
@@ -131,7 +130,6 @@ module.exports.logout = async (req, res) => {
 module.exports.forgetPassword = async (req, res) => {
     try {
         let { email } = req.body;
-
         const user = await User.findOne({ email: email });
         if (!user) {
             throw new Error("User not registered");
