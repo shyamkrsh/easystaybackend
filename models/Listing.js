@@ -16,7 +16,7 @@ const listingSchema = new Schema({
     },
     availability: {
         type: String,
-        required: true,
+        default: 'available'
     },
     price: {
         type: String || Number,
