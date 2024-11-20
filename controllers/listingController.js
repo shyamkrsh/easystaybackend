@@ -168,6 +168,7 @@ module.exports.editListing = async (req, res) => {
     const { id } = req.params;
     try {
         let data = req.body;
+        let listing = await Listing.findById(id);
         let updatedListing = await Listing.findOneAndUpdate({ _id: id }, {
             title: data.title,
             category: data.category,
@@ -180,6 +181,18 @@ module.exports.editListing = async (req, res) => {
         },
             { new: true },
         )
+        if(req?.files[0]){
+            await cloudinary.uploader.destroy(listing.images[0].filename);
+        }
+        if(req?.files[1]){
+            await cloudinary.uploader.destroy(listing.images[1].filename);
+        }
+        if(req?.files[2]){
+            await cloudinary.uploader.destroy(listing.images[2].filename);
+        }
+        if(req?.files[3]){
+            await cloudinary.uploader.destroy(listing.images[3].filename);
+        }
         updatedListing.images.push({ url: req?.files[0]?.path, filename: req?.files[0]?.filename })
         updatedListing.images.push({ url: req?.files[1]?.path, filename: req?.files[1]?.filename })
         updatedListing.images.push({ url: req?.files[2]?.path, filename: req?.files[2]?.filename })
