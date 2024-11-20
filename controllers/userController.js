@@ -70,11 +70,7 @@ module.exports.login = async (req, res) => {
         // Compare passwords
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(401).json({ 
-                message: "Invalid password", 
-                error: true, 
-                success: false 
-            });
+           throw new Error("Icorrect Password")
         }
 
         // Generate JWT token
@@ -140,7 +136,6 @@ module.exports.forgetPassword = async (req, res) => {
         forgetMail(user.email, user.name, currPassword, `https://easystayngp.vercel.app/api/changePassword/${user._id}`);
         user.password = hashPassword;
         await user.save();
-
         res.status(200).json({
             message: "Password Changed successfully",
             data: user,
