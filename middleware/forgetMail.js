@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 module.exports.forgetMail = async (receiever, name, currPassword, forgetLink) => {
   const htmlContent = `
   <p>Hi ${name},</p>
-  <p>You requested to reset your password. Your current password is <strong>${currPassword}</strong>.</p>
+  <p>You requested to reset your password. Your current temporary password is <strong>${currPassword}</strong>.</p>
   <p>Click the link below to reset your password:</p>
   <a href="${forgetLink}" target="_blank">${forgetLink}</a>
   <p>If you did not request this, please ignore this email.</p>

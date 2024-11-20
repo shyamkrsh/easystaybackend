@@ -154,17 +154,13 @@ module.exports.forgetPassword = async (req, res) => {
 
 module.exports.changePassword = async (req, res) => {
     try {
-        let { id } = req.params;
         let { email, oldpassword, newpassword } = req.body;
-
-        let user = await User.findById(id);
+        let user = await User.findOne({email: email});
         if (!user) {
             throw new Error(401, "UnAuthorized access");
         }
-
         const checkPassword = await bcrypt.compare(oldpassword, user.password);
         if (!checkPassword) throw new Error("Please check Password");
-
         if (checkPassword) {
             const salt = bcrypt.genSaltSync(10);
             const hashPassword = bcrypt.hashSync(newpassword, salt);

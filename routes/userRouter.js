@@ -13,5 +13,5 @@ router.post("/login", userController.login);
 router.get("/user-details", authToken, userDetailsController);
 router.post("/logout", authToken, userController.logout);
 router.post("/forgetPassword", userController.forgetPassword);
-router.post("/changePassword/:id", userController.changePassword);
+router.post("/changePassword", userController.changePassword);
 module.exports = router; 
