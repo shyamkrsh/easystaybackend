@@ -136,10 +136,10 @@ module.exports.deleteListing = async (req, res) => {
         const { id } = req.params;
         let list = await Listing.findById(id);
         if (list) {
-            await cloudinary.uploader.destroy(listing.images[0].filename);
-            await cloudinary.uploader.destroy(listing.images[1].filename);
-            await cloudinary.uploader.destroy(listing.images[2].filename);
-            await cloudinary.uploader.destroy(listing.images[3].filename);
+            await cloudinary.uploader.destroy(list.images[0].filename);
+            await cloudinary.uploader.destroy(list.images[1].filename);
+            await cloudinary.uploader.destroy(list.images[2].filename);
+            await cloudinary.uploader.destroy(list.images[3].filename);
             res.status(200).json({
                 message: "Listing Deleted Successfully",
                 data: listing,
