@@ -21,6 +21,7 @@ module.exports.newApplication = async (req, res) => {
             content: `${req.body.name} is booking your service - ${listing.title} please see their details on you dashboard's clients section.`,
         })
         await application.save();
+        await notification.save();
         user.clients.push(application._id);
         user.notifications.push(notification._id);
         await user.save();
