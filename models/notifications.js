@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
-let date = new Date();  
+let date = new Date(); 
 
 const notificationSchema = new Schema({
     name: {
@@ -11,7 +11,7 @@ const notificationSchema = new Schema({
         type: String,
     },
     createdAt: {
-        type: Date,
+        type: String,
         default: date.toString(),
     }
 })

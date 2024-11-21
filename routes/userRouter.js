@@ -14,4 +14,6 @@ router.get("/user-details", authToken, userDetailsController);
 router.post("/logout", authToken, userController.logout);
 router.post("/forgetPassword", userController.forgetPassword);
 router.post("/changePassword", userController.changePassword);
+router.delete("/notifications/:id/delete", authToken, userController.deleteNotification);
+
 module.exports = router; 

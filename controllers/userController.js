@@ -2,7 +2,8 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { sendMail } = require("../middleware/sendMail");
-const {forgetMail} = require("../middleware/forgetMail")
+const { forgetMail } = require("../middleware/forgetMail")
+const Notification = require("../models/notifications");
 
 
 module.exports.signup = async (req, res) => {
@@ -70,7 +71,7 @@ module.exports.login = async (req, res) => {
         // Compare passwords
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-           throw new Error("Icorrect Password")
+            throw new Error("Icorrect Password")
         }
 
         // Generate JWT token
@@ -78,17 +79,17 @@ module.exports.login = async (req, res) => {
             _id: user._id,
             email: user.email,
         };
-        const token = jwt.sign(tokenData,"mysecretStringyoucantchanged", {
+        const token = jwt.sign(tokenData, "mysecretStringyoucantchanged", {
             expiresIn: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
 
-        
+
         const tokenOptions = {
             httpOnly: true,
-            secure: true, 
+            secure: true,
             sameSite: "None"
         };
-        
+
         res.cookie("token", token, tokenOptions).status(200).json({
             message: "Login successful",
             data: user,
@@ -98,7 +99,7 @@ module.exports.login = async (req, res) => {
 
     } catch (err) {
         res.status(500).json({
-            message:err.message || err,
+            message: err.message || err,
             error: true,
             success: false,
         });
@@ -155,7 +156,7 @@ module.exports.forgetPassword = async (req, res) => {
 module.exports.changePassword = async (req, res) => {
     try {
         let { email, oldpassword, newpassword } = req.body;
-        let user = await User.findOne({email: email});
+        let user = await User.findOne({ email: email });
         if (!user) {
             throw new Error(401, "UnAuthorized access");
         }
@@ -184,4 +185,23 @@ module.exports.changePassword = async (req, res) => {
         })
     }
 
+}
+module.exports.deleteNotification = async (req, res) => {
+    try {
+        let { id } = req.params;
+        let notification = await Notification.findByIdAndDelete(id);
+        res.json({
+            message: 'Notification Deleted',
+            data: notification,
+            error: false,
+            success: false,
+        })
+    } catch (err) {
+        res.json({
+            message: err.message || err,
+            data: [],
+            error: true,
+            success: false,
+        })
+    }
 }
