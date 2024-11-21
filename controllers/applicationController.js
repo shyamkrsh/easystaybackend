@@ -18,7 +18,7 @@ module.exports.newApplication = async (req, res) => {
         })
         let notification = new Notification({
             name: req.body.name,
-            content: `${req.body.name} is booking your service - ${listing.title} please see their details on you dashboard's clients section.`,
+            content: `${req.body.name} is booking your service - ${listing.title} please see their details on your dashboard's clients section.`,
         })
         await application.save();
         await notification.save();
