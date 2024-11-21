@@ -21,7 +21,7 @@ module.exports.newApplication = async (req, res) => {
         })
         await application.save();
         user.clients.push(application._id);
-        user.notifications.push(notification.id);
+        user.notifications.push(notification._id);
         await user.save();
         appliedEmail(req.body.email, name, listing.title, listing.price);
         res.status(201).json({
