@@ -2,6 +2,7 @@ const Listing = require("../models/Listing");
 const Application = require("../models/Application");
 const User = require("../models/User");
 const {appliedEmail} = require("../middleware/appliedEmail");
+const Notification = require("../models/notifications");
 
 module.exports.newApplication = async (req, res) => {
     try {
