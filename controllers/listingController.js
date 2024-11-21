@@ -147,8 +147,6 @@ module.exports.deleteListing = async (req, res) => {
                 error: false,
                 success: true,
             })
-
-
         } else {
             throw new Error("Services not exists");
         }

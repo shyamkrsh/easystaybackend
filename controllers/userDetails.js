@@ -2,7 +2,7 @@ const User = require("../models/User");
 
 async function userDetailsController(req, res) {
     try {
-        const user = await User.findById(req.userId);
+        const user = await User.findById(req.userId).populate('notifications');
         if(!user){
             throw new Error("User not login");
         }
@@ -14,7 +14,6 @@ async function userDetailsController(req, res) {
                 message: "User Details",
             })
         }
-
     } catch (err) {
         res.status(400).json({
             message: err.message || err,

@@ -3,7 +3,6 @@ const Listing = require("./Listing");
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-
     profileImage: {
         type: String,
     },
