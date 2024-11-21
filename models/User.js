@@ -44,6 +44,12 @@ const userSchema = new Schema({
             ref: 'Report',
         }
     ],
+    notifications: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Notification',
+        }
+    ]
  
 })
 
