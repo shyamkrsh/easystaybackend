@@ -1,11 +1,13 @@
 const Listing = require("../models/Listing");
 const Review = require("../models/Review");
 const User = require("../models/User");
+const Notification = require("../models/notifications");
 
 
 module.exports.createReviews = async (req, res) => {
     try {
         const currUser = await User.findById(req.userId);
+        let user = await User.findById(listing.owner);
         const { id } = req.params;
         let listing = await Listing.findById(id);
         const newReviews = new Review({
@@ -13,9 +15,16 @@ module.exports.createReviews = async (req, res) => {
             rating: req.body.rating,
             author: currUser,
         })
+        let notification = new Notification({
+            name: currUser.name,
+            content: `${currUser.name} given ${req.body.rating} ⭐ rating on your service - ${listing.title}.`,
+        })
         listing.reviews.push(newReviews);
+        user.notifications.push(notification);
         await newReviews.save();
+        await notification.save();
         await listing.save();
+        await user.save();
 
         res.status(200).json({
             message: "Review Created successfully",
