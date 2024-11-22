@@ -2,7 +2,6 @@ const Listing = require("../models/Listing");
 const User = require("../models/User");
 const cloudinary = require('cloudinary').v2;
 
-
 module.exports.showAllListings = async (req, res) => {
     try {
         const { category } = req.params;
