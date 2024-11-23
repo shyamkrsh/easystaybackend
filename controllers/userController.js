@@ -71,11 +71,7 @@ module.exports.login = async (req, res) => {
         // Compare passwords
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-           return res.status(401).json({
-                message: "Incorrect Password",
-                error: true,
-                success: false,
-            });
+            throw new Error("Icorrect Password");
         }
 
         // Generate JWT token
@@ -102,7 +98,7 @@ module.exports.login = async (req, res) => {
         });
 
     } catch (err) {
-        res.status(500).json({
+        res.json({
             message: err.message || err,
             error: true,
             success: false,
