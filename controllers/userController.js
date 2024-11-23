@@ -42,7 +42,6 @@ module.exports.signup = async (req, res) => {
             throw new Error(err);
         })
     } catch (err) {
-        console.log(err)
         res.json({
             message: err.message || err,
             error: true,
@@ -116,7 +115,7 @@ module.exports.logout = async (req, res) => {
             data: [],
         });
     } catch (err) {
-        res.status(500).json({
+        res.json({
             message: err.message || "An error occurred during logout",
             error: true,
             success: false,
