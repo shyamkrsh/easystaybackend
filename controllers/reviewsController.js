@@ -7,9 +7,9 @@ const Notification = require("../models/notifications");
 module.exports.createReviews = async (req, res) => {
     try {
         const currUser = await User.findById(req.userId);
-        let user = await User.findById(listing.owner);
         const { id } = req.params;
         let listing = await Listing.findById(id);
+        let user = await User.findById(listing.owner);
         const newReviews = new Review({
             content: req.body.content,
             rating: req.body.rating,
@@ -19,11 +19,10 @@ module.exports.createReviews = async (req, res) => {
             name: currUser.name,
             content: `${currUser.name} given ${req.body.rating} ⭐ rating on your service - ${listing.title}.`,
         })
-        
-        await newReviews.save();
-        await notification.save();
         listing.reviews.push(newReviews);
         user.notifications.push(notification);
+        await newReviews.save();
+        await notification.save();
         await listing.save();
         await user.save();
 
@@ -34,7 +33,7 @@ module.exports.createReviews = async (req, res) => {
             success: true,
         })
     } catch (err) {
-        res.json({
+        res.status(400).json({
             message: err.message || err,
             data: [],
             error: true,
