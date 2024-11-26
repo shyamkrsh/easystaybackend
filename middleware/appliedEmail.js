@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 })
 
 
-module.exports.forgetMail = async (receiever, name, serviceTitle, servicePrice) => {
+module.exports.appliedEmail = async (receiever, name, serviceTitle, servicePrice) => {
   const htmlContent = `
   <p>Hi ${name},</p>
   <p>You have applied to book  <strong>${serviceTitle}</strong>, monthly rent of this service is <strong> ₹ ${servicePrice} / per month </strong>.</p>
