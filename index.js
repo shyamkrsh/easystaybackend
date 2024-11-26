@@ -72,8 +72,8 @@ app.post("/create-owner", async (req, res) => {
         account_type: "bank_account",
         bank_account: {
           name,
-          ifsc: "HDFC0001234", // Replace with actual IFSC code
-          account_number: "1234567890", // Replace with actual account number
+          ifsc: "HDFC0001234", 
+          account_number: "1234567890", 
         },
       });
   
