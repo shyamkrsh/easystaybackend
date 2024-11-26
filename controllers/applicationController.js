@@ -25,7 +25,7 @@ module.exports.newApplication = async (req, res) => {
         user.clients.push(application._id);
         user.notifications.push(notification._id);
         await user.save();
-        appliedEmail(req.body.email, name, listing.title, listing.price);
+        appliedEmail(req.body.email, req.body.name, listing.title, listing.price);
         res.status(201).json({
             message: "New Application created",
             data: application,
