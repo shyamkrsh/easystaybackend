@@ -19,10 +19,11 @@ module.exports.createReviews = async (req, res) => {
             name: currUser.name,
             content: `${currUser.name} given ${req.body.rating} ⭐ rating on your service - ${listing.title}.`,
         })
-        listing.reviews.push(newReviews);
-        user.notifications.push(notification);
+        
         await newReviews.save();
         await notification.save();
+        listing.reviews.push(newReviews);
+        user.notifications.push(notification);
         await listing.save();
         await user.save();
 
@@ -33,7 +34,7 @@ module.exports.createReviews = async (req, res) => {
             success: true,
         })
     } catch (err) {
-        res.status(400).json({
+        res.json({
             message: err.message || err,
             data: [],
             error: true,
