@@ -22,6 +22,9 @@ const listingSchema = new Schema({
         type: String || Number,
         required: true,
     },
+    duration: {
+        type: String,
+    },
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User",

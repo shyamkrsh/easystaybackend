@@ -31,6 +31,7 @@ module.exports.newListing = async (req, res) => {
             location: data.location,
             availability: data.availability,
             price: data.price,
+            duration: data.duration,
             owner: req.userId,
             payment: data.payment,
             description: data.description,
